@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Holiday Ready — Holiday Extras</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --hx-purple: #542E91;
+      --hx-purple-dark: #3d2069;
+      --hx-purple-light: #6b3db5;
+      --hx-yellow: #FDDC06;
+      --hx-yellow-hover: #e8c900;
+      --hx-white: #FFFFFF;
+      --hx-off-white: #F0F0F0;
+      --hx-black: #232323;
+      --hx-font: 'Nunito', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--hx-font);
+      background: var(--hx-off-white);
+      color: var(--hx-black);
+      overflow-x: hidden;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes badgePop {
+      0%   { transform: scale(0.7) rotate(-8deg); opacity: 0; }
+      70%  { transform: scale(1.08) rotate(2deg); opacity: 1; }
+      100% { transform: scale(1) rotate(-4deg); opacity: 1; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(-4deg); }
+      50%       { transform: translateY(-8px) rotate(-4deg); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes pulse-ring {
+      0%   { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.35); opacity: 0; }
+    }
+    @keyframes checkBounce {
+      0%   { transform: scale(0); }
+      60%  { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .animate-1 { animation: fadeUp 0.65s cubic-bezier(.22,.68,0,1.2) 0.1s both; }
+    .animate-2 { animation: fadeUp 0.65s cubic-bezier(.22,.68,0,1.2) 0.25s both; }
+    .animate-3 { animation: fadeUp 0.65s cubic-bezier(.22,.68,0,1.2) 0.4s both; }
+    .animate-4 { animation: fadeUp 0.65s cubic-bezier(.22,.68,0,1.2) 0.55s both; }
+    .animate-5 { animation: fadeUp 0.65s cubic-bezier(.22,.68,0,1.2) 0.7s both; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--hx-purple);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-tag {
+      background: var(--hx-yellow);
+      color: var(--hx-purple);
+      font-family: var(--hx-font);
+      font-weight: 900;
+      font-size: 15px;
+      padding: 6px 14px;
+      border-radius: 4px 4px 4px 0;
+      letter-spacing: -0.3px;
+      position: relative;
+    }
+    .logo-tag::after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 7px solid var(--hx-yellow-hover);
+      border-bottom: 7px solid transparent;
+    }
+
+    .logo-name {
+      color: var(--hx-white);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--hx-purple);
+      padding: 56px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* decorative circles */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(253,220,6,0.08);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      pointer-events: none;
+    }
+
+    .offer-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--hx-yellow);
+      color: var(--hx-purple);
+      font-weight: 900;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      animation: badgePop 0.6s cubic-bezier(.22,.68,0,1.2) 0.15s both;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      color: var(--hx-white);
+      font-size: clamp(36px, 9vw, 58px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 .highlight {
+      color: var(--hx-yellow);
+    }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.82);
+      font-size: clamp(16px, 4vw, 19px);
+      font-weight: 600;
+      line-height: 1.5;
+      max-width: 420px;
+      margin: 0 auto 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── FORM ── */
+    .form-wrap {
+      max-width: 440px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .email-input {
+      width: 100%;
+      padding: 18px 20px;
+      border-radius: 12px;
+      border: 3px solid transparent;
+      font-family: var(--hx-font);
+      font-size: 16px;
+      font-weight: 600;
+      background: var(--hx-white);
+      color: var(--hx-black);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .email-input::placeholder { color: #aaa; font-weight: 400; }
+    .email-input:focus {
+      border-color: var(--hx-yellow);
+      box-shadow: 0 0 0 4px rgba(253,220,6,0.25);
+    }
+
+    .cta-btn {
+      width: 100%;
+      padding: 18px 24px;
+      background: var(--hx-yellow);
+      color: var(--hx-purple);
+      font-family: var(--hx-font);
+      font-size: 17px;
+      font-weight: 900;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      letter-spacing: -0.2px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+      background-size: 200% auto;
+      animation: shimmer 2.2s linear infinite;
+    }
+
+    .cta-btn:hover {
+      background: var(--hx-yellow-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(253,220,6,0.4);
+    }
+    .cta-btn:active { transform: translateY(0); }
+
+    /* pulse ring on btn */
+    .btn-pulse {
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      border: 3px solid var(--hx-yellow);
+      animation: pulse-ring 1.8s ease-out infinite;
+      pointer-events: none;
+    }
+
+    .trust-note {
+      margin-top: 16px;
+      color: rgba(255,255,255,0.65);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .trust-note i { color: var(--hx-yellow); font-size: 12px; }
+
+    /* ── SUCCESS STATE ── */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 8px 0;
+      animation: fadeIn 0.4s ease both;
+    }
+    .success-icon {
+      width: 64px; height: 64px;
+      background: var(--hx-yellow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 28px;
+      color: var(--hx-purple);
+      animation: checkBounce 0.5s cubic-bezier(.22,.68,0,1.4) both;
+    }
+    .success-title {
+      color: var(--hx-white);
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .success-sub {
+      color: rgba(255,255,255,0.75);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    /* ── WAVE DIVIDER ── */
+    .wave {
+      display: block;
+      margin-top: -2px;
+    }
+
+    /* ── PRODUCTS ── */
+    .products {
+      background: var(--hx-white);
+      padding: 60px 24px;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--hx-purple);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(24px, 6vw, 34px);
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      color: var(--hx-black);
+      margin-bottom: 40px;
+      line-height: 1.15;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: var(--hx-off-white);
+      border-radius: 16px;
+      padding: 28px 20px 24px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+      border: 2px solid transparent;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(84,46,145,0.12);
+      border-color: var(--hx-purple);
+    }
+
+    .product-icon {
+      width: 52px; height: 52px;
+      background: var(--hx-purple);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 22px;
+      color: var(--hx-yellow);
+    }
+
+    .product-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--hx-black);
+      margin-bottom: 6px;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      font-weight: 600;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* ── TRUST ── */
+    .trust {
+      background: var(--hx-off-white);
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto 40px;
+      background: var(--hx-white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(84,46,145,0.08);
+    }
+
+    .stat-item {
+      flex: 1;
+      padding: 28px 16px;
+      border-right: 1px solid var(--hx-off-white);
+    }
+    .stat-item:last-child { border-right: none; }
+
+    .stat-number {
+      font-size: clamp(26px, 6vw, 34px);
+      font-weight: 900;
+      color: var(--hx-purple);
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .review-card {
+      max-width: 400px;
+      margin: 0 auto;
+      background: var(--hx-white);
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 20px rgba(84,46,145,0.08);
+      text-align: left;
+    }
+
+    .stars {
+      color: var(--hx-yellow);
+      font-size: 18px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 1px 2px rgba(84,46,145,0.2));
+    }
+
+    .review-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--hx-black);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .reviewer-avatar {
+      width: 38px; height: 38px;
+      background: var(--hx-purple);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--hx-yellow);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .reviewer-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--hx-black);
+    }
+    .reviewer-meta {
+      font-size: 12px;
+      font-weight: 600;
+      color: #999;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--hx-purple);
+      padding: 40px 24px 32px;
+      text-align: center;
+    }
+
+    .strapline {
+      font-size: clamp(20px, 5vw, 28px);
+      font-weight: 900;
+      color: var(--hx-yellow);
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.55);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--hx-white); }
+
+    .footer-copy {
+      color: rgba(255,255,255,0.35);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ── OFFER TICKER ── */
+    .offer-ticker {
+      background: var(--hx-yellow);
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-inner {
+      display: inline-flex;
+      gap: 48px;
+      animation: ticker 20s linear infinite;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--hx-purple);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ticker-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--hx-purple);
+      display: inline-block;
+      opacity: 0.4;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 480px) {
+      .form-row {
+        flex-direction: row;
+      }
+      .email-input { border-radius: 12px 0 0 12px; }
+      .cta-btn { width: auto; border-radius: 0 12px 12px 0; white-space: nowrap; }
+    }
+
+    @media (min-width: 640px) {
+      .hero { padding: 72px 40px 96px; }
+      .product-grid { grid-template-columns: repeat(4, 1fr); max-width: 720px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">
+      <span class="logo-tag">HX</span>
+      <span class="logo-name">Holiday Extras</span>
+    </a>
+  </nav>
+
+  <!-- OFFER TICKER -->
+  <div class="offer-ticker" aria-hidden="true">
+    <div class="ticker-inner">
+      <span class="ticker-item">Spring Sale <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Up to 20% off <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Airport Parking <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Airport Hotels <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Airport Lounges <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Transfers &amp; More <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Spring Sale <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Up to 20% off <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Airport Parking <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Airport Hotels <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Airport Lounges <span class="ticker-dot"></span></span>
+      <span class="ticker-item">Transfers &amp; More <span class="ticker-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="offer-badge animate-1">
+      🌸 &nbsp;Spring offer — limited time
+    </div>
+
+    <h1 class="animate-2">
+      Get<br>Holiday<br><span class="highlight">Ready.</span>
+    </h1>
+
+    <p class="hero-sub animate-3">
+      Save up to <strong style="color:var(--hx-yellow)">20% off</strong> airport parking, hotels, lounges and more. Less hassle, more you.
+    </p>
+
+    <!-- FORM -->
+    <div class="form-wrap animate-4">
+      <div id="form-container">
+        <div class="form-row">
+          <input
+            class="email-input"
+            type="email"
+            id="email-input"
+            placeholder="Your email address"
+            autocomplete="email"
+            required
+          />
+          <button class="cta-btn" id="cta-btn" onclick="handleSubmit(event)">
+            <div class="btn-pulse"></div>
+            Unlock my offer &nbsp;<i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-state" id="success-state">
+        <div class="success-icon"><i class="fa fa-check"></i></div>
+        <div class="success-title">You're on the list!</div>
+        <div class="success-sub">Check your inbox — your spring offer is on its way.</div>
+      </div>
+    </div>
+
+    <p class="trust-note animate-5">
+      <i class="fa fa-shield-halved"></i>
+      No spam. Unsubscribe any time. Over 8 million travellers trust Holiday Extras.
+    </p>
+
+  </section>
+
+  <!-- WAVE -->
+  <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 54" preserveAspectRatio="none" style="display:block;background:var(--hx-white);">
+    <path fill="#542E91" d="M0,0 C360,54 1080,54 1440,0 L1440,0 L0,0 Z"/>
+  </svg>
+
+  <!-- PRODUCTS -->
+  <section class="products">
+    <p class="section-label">Everything you need</p>
+    <h2 class="section-title">Your whole trip,<br>sorted in one place.</h2>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-icon"><i class="fa fa-square-parking"></i></div>
+        <div class="product-name">Parking</div>
+        <div class="product-desc">Stress-free airport parking from just £X a day</div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon"><i class="fa fa-bed"></i></div>
+        <div class="product-name">Hotels</div>
+        <div class="product-desc">Stay the night before and breeze through the morning</div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon"><i class="fa fa-champagne-glasses"></i></div>
+        <div class="product-name">Lounges</div>
+        <div class="product-desc">Start your holiday the moment you step airside</div>
+      </div>
+      <div class="product-card">
+        <div class="product-icon"><i class="fa fa-van-shuttle"></i></div>
+        <div class="product-name">Transfers</div>
+        <div class="product-desc">Door-to-departure, no faff, no hidden charges</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust">
+    <p class="section-label">Why Holiday Extras</p>
+    <h2 class="section-title">Trusted by millions<br>of travellers.</h2>
+
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-number">8M+</div>
+        <div class="stat-label">Travellers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">40+</div>
+        <div class="stat-label">Years</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4.7★</div>
+        <div class="stat-label">Rating</div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Booked parking and a hotel together — the whole thing took about 3 minutes. Saved us a fortune compared to booking separately. Will never go back to the old way."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">SR</div>
+        <div>
+          <div class="reviewer-name">Sarah R.</div>
+          <div class="reviewer-meta">Flew from Gatwick · March 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="strapline">Less hassle.<br>More holiday.</div>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">holidayextras.com</a>
+    </div>
+    <p class="footer-copy">© 2026 Holiday Extras Group. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('email-input').value.trim();
+      const btn = document.getElementById('cta-btn');
+      const formContainer = document.getElementById('form-container');
+      const successState = document.getElementById('success-state');
+
+      if (!email || !email.includes('@')) {
+        document.getElementById('email-input').focus();
+        document.getElementById('email-input').style.borderColor = '#FF5F68';
+        setTimeout(() => {
+          document.getElementById('email-input').style.borderColor = 'transparent';
+        }, 2000);
+        return;
+      }
+
+      // Loading state
+      btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+      btn.style.pointerEvents = 'none';
+
+      // Simulate submission (replace with real Formspree endpoint)
+      setTimeout(() => {
+        formContainer.style.display = 'none';
+        successState.style.display = 'block';
+      }, 900);
+    }
+
+    // Intersection observer for scroll animations on product cards
+    const cards = document.querySelectorAll('.product-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = `fadeUp 0.5s cubic-bezier(.22,.68,0,1.2) ${i * 0.1}s both`;
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    cards.forEach(c => observer.observe(c));
+
+    const stats = document.querySelectorAll('.stat-item');
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = `fadeUp 0.5s cubic-bezier(.22,.68,0,1.2) ${i * 0.12}s both`;
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    stats.forEach(s => statsObserver.observe(s));
+  </script>
+
+</body>
+</html>
